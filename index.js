@@ -29,10 +29,17 @@ console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
   
   1. What is the difference between counter1 and counter2?
   
+
+
   2. Which of the two uses a closure? How can you tell?
+
+
   
   3. In what scenario would the counter1 code be preferable? In what scenario would 
      counter2 be better?  
+
+
+
 */
 
 // counter1 code
@@ -61,11 +68,10 @@ Use the inning function below to do the following:
   
 NOTE: This will be a callback function for the tasks below
 */
-
-function inning(/*Code Here*/){
-    /*Code Here*/
+function innings(){
+    return Math.floor(Math.random() * 3);
 }
-
+console.log('Task 2', innings())
 
 /* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
 Use the finalScore function below to do the following:
@@ -80,21 +86,50 @@ Use the finalScore function below to do the following:
   "Away": 5
 }
 */ 
-
-function finalScore(/*code Here*/){
-  /*Code Here*/
+function innings_count(){
+  return 10 - Math.floor(Math.random() * 3);
 }
+
+function generate_inning_scores(generate_points){
+return {
+  Home: generate_points(),
+  Away: generate_points()
+}
+}
+
+
+function gen_game(points, count){
+  let total_points = {
+    Away: 0,
+    Home: 0,
+  }
+  let total_innings = count()
+  
+  for (let i = 0; i < total_innings; i++){
+      let inning = generate_inning_scores(innings)
+
+      total_points.Away = total_points.Away +inning.Away
+      total_points.Home = total_points.Home +inning.Home
+      total_points.inning = i+1
+  }
+  return total_points
+
+}
+
+console.log('Task 3', gen_game(innings, innings_count))
+
+
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
   1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(/*Your Code Here */) {
-  /*Your Code Here */
+function getInningScore(callBackFunk) {
+  return total_points.Home
 }
 
-
+console.log('Task 4', getInningScore)
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
   1. Receive the callback function `getInningScore` from Task 4
