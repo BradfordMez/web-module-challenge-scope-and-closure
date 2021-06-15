@@ -68,7 +68,7 @@ dansRoll();
 
 a. Where is closure used in this code? How can you tell?
 
-The Closure would be
+The Closure would be ${Name} within the personalDice function.
 
 b. Compare and contrast calling `dansRoll` the first and second time What is always the same? What could change?
 
