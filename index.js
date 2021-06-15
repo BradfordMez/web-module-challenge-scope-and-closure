@@ -13,123 +13,107 @@
  * It returns the string `foofoo`
 */
 
-function processFirstItem(stringList, callback) {
-  return callback(stringList[0])
-}
-console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
+// function processFirstItem(stringList, callback) {
+//   return callback(stringList[1])
+
+// }
+// console.log(processFirstItem(['foo','bar'],function(str){return str+str}));
 
 // ⭐️ Example Challenge END ⭐️
 
 
-///// M V P ///////
+// ///// M V P ///////
 
-/*Task 1: counterMaker()
+// // Task 1: counterMaker()
   
-  Study the code for counter1 and counter2, then answer the questions below.
+// //   Study the code for counter1 and counter2, then answer the questions below.
   
-  1. What is the difference between counter1 and counter2?
+// //   1. What is the difference between counter1 and counter2?
+//         'counter1 allows us to reference two values, one for counterMaker and one for the private variable counter'
+
+
+// //   2. Which of the two uses a closure? How can you tell?
+//         'counter2 uses a closure because the function references count, which is outside of the functions scope.'
+
   
+// //   3. In what scenario would the counter1 code be preferable? In what scenario would 
+// //      counter2 be better?  
+//         'counter1 would be preferable in a situation where a counter is necessary but you would also like to have a constant variable as well. counter2 is preferable when you will only need a counter.'
 
 
-  2. Which of the two uses a closure? How can you tell?
 
 
+// // // counter1 code
+// function counterMaker() {
+//   let count = 0;
+//   return function counter() {
+//    return count++;
+//   }
+// }
+
+// const counter1 = counterMaker();
+
+
+// // counter2 code
+// let count = 0;
+
+// function counter2() {
+//   return count++;
+// }
+
+
+// /* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
+// Use the inning function below to do the following:
+//   1. Return a random whole number of points between 0 and 2 scored by one team in an inning
   
-  3. In what scenario would the counter1 code be preferable? In what scenario would 
-     counter2 be better?  
-
-
-
-*/
-
-// counter1 code
-function counterMaker() {
-  let count = 0;
-  return function counter() {
-   return count++;
-  }
-}
-
-const counter1 = counterMaker();
-
-// counter2 code
-let count = 0;
-
-function counter2() {
-  return count++;
-}
-
-
-/* ⚾️⚾️⚾️ Task 2: inning() ⚾️⚾️⚾️
-Use the inning function below to do the following:
-  1. Return a random whole number of points between 0 and 2 scored by one team in an inning
+//   For example: invoking inning() should return a numerical score value of 0, 1, or 2
   
-  For example: invoking inning() should return a numerical score value of 0, 1, or 2
-  
-NOTE: This will be a callback function for the tasks below
-*/
-function innings(){
+// NOTE: This will be a callback function for the tasks below
+// */
+function score(){
     return Math.floor(Math.random() * 3);
 }
-console.log('Task 2', innings())
 
-/* ⚾️⚾️⚾️ Task 3: finalScore() ⚾️⚾️⚾️
-Use the finalScore function below to do the following:
-  1. Receive the callback function `inning` that was created in Task 2 
-  2. Receive a number of innings to be played
-  3. After each inning, update the score of the home and away teams
-  4. After the last inning, return an object containing the final (total) score of the innings played
-  
-  For example: invoking finalScore(inning, 9) might return this object:
-{
-  "Home": 11,
-  "Away": 5
-}
-*/ 
-function innings_count(){
-  return 10 - Math.floor(Math.random() * 3);
-}
-
-function generate_inning_scores(generate_points){
-return {
-  Home: generate_points(),
-  Away: generate_points()
-}
-}
-
-
-function gen_game(points, count){
-  let total_points = {
-    Away: 0,
-    Home: 0,
+function baseBall(scoreCB){
+  return {
+    Home: scoreCB(),
+    Away: scoreCB()
   }
-  let total_innings = count()
-  
-  for (let i = 0; i < total_innings; i++){
-      let inning = generate_inning_scores(innings)
-
-      total_points.Away = total_points.Away +inning.Away
-      total_points.Home = total_points.Home +inning.Home
-      total_points.inning = i+1
-  }
-  return total_points
-
 }
 
-console.log('Task 3', gen_game(innings, innings_count))
+function finalScore(scoreCB, gameCB){
+  let totalScore = [];
+  let homeScore = 0;
+  let awayScore = 0;
+  for (let i=0; i < 9; i++) {
+    const currentScore = gameCB(scoreCB);
+    Home = homeScore + currentScore.Home
+    Away = awayScore + currentScore.Away
+    totalScore.push(`Period ${i +1}, Home = ${currentScore.Home} Away = ${currentScore.Away}`);
+    }
+return totalScore
+  }
+ 
+
+console.log('Task 3', finalScore(score, baseBall))
+
 
 
 
 /* ⚾️⚾️⚾️ Task 4: getInningScore() ⚾️⚾️⚾️
 Use the getInningScore() function below to do the following:
-  1. Receive a callback function - you will pass in the inning function from task 2 as your argument 
+  1. Receive a callback function - you will pass in the score function from task 2 as your argument 
   2. Return an object with a score for home and a score for away that populates from invoking the inning callback function */
 
-function getInningScore(callBackFunk) {
-  return total_points.Home
+function getInningScore() {
+  const scoreByInning {
+      Home: scoreCB(),
+      Away: scoreCB()
+ } 
+  return (`Home : ${scoreByInning.Home} Away : ${scoreByInning.Away}`)
 }
+  console.log
 
-console.log('Task 4', getInningScore)
 /* ⚾️⚾️⚾️ Task 5: scoreboard() ⚾️⚾️⚾️
 Use the scoreboard function below to do the following:
   1. Receive the callback function `getInningScore` from Task 4
