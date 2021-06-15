@@ -43,6 +43,9 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
+Closure is when you are grabbing a variable from outside the child function.
+
 2. Study the following code, then answer the questions below.
 
 ```js
@@ -65,12 +68,16 @@ dansRoll();
 
 a. Where is closure used in this code? How can you tell?
 
+The Closure would be
 
 b. Compare and contrast calling `dansRoll` the first and second time What is always the same? What could change?
+
+every time you call dansRoll, you will receive Dan rolled a (roll). Everytime its invoked the newRoll will be different.
 
 
 c. What is the lexical scope of `newRoll`? 
 
+The scope is personalDice
 
 ### Task 3 - Stretch Goals
 
